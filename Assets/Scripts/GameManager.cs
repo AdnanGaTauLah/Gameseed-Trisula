@@ -12,11 +12,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float levelTime = 90f;
     public float timeRemaining { get; private set; }
 
-    // --- NEW REFERENCES ---
     [Header("System References")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private TypingManager typingManager;
-    // ----------------------
+    [SerializeField] private UIManager uiManager;
+
+    [Header("Scoring")]
+    [Tooltip("Time remaining required for a 3-star rating.")]
+    [SerializeField] private float threeStarThreshold = 60f;
+    [Tooltip("Time remaining required for a 2-star rating.")]
+    [SerializeField] private float twoStarThreshold = 30f;
+    // 1 star is anything above 0.
 
     public static GameManager Instance { get; private set; }
 
@@ -41,20 +47,20 @@ public class GameManager : MonoBehaviour
                 timeRemaining = 0;
                 Debug.Log("GAME OVER - Ran out of time!");
                 currentState = GameState.Finished;
+                // We could show a "Game Over" panel here
             }
         }
     }
+
 
     public void StartNewGame()
     {
         timeRemaining = levelTime;
         currentState = GameState.Playing;
 
-        // Ensure player controls are on and typing panel is off
         playerController.SetControlsEnabled(true);
         typingManager.gameObject.SetActive(false);
-
-        Debug.Log("New game started! State: Playing");
+        // The UIManager already hides its results panel in its own Start() method.
     }
 
     public void StartTypingPhase()
@@ -64,10 +70,8 @@ public class GameManager : MonoBehaviour
             currentState = GameState.Typing;
             Debug.Log("Delivery reached! State: Typing");
 
-            // --- ORCHESTRATION ---
-            playerController.SetControlsEnabled(false); // Stop the player
-            typingManager.StartChallenge();             // Start the typing game
-            // ---------------------
+            playerController.SetControlsEnabled(false);
+            typingManager.StartChallenge();
         }
     }
 
@@ -77,7 +81,24 @@ public class GameManager : MonoBehaviour
         {
             currentState = GameState.Finished;
             Debug.Log("Typing complete! State: Finished. Time Remaining: " + timeRemaining);
-            // We will add code here later to calculate and display stars.
+
+            // --- SCORING LOGIC ---
+            int stars = 0;
+            if (timeRemaining >= threeStarThreshold)
+            {
+                stars = 3;
+            }
+            else if (timeRemaining >= twoStarThreshold)
+            {
+                stars = 2;
+            }
+            else if (timeRemaining > 0)
+            {
+                stars = 1;
+            }
+            // 0 stars if time ran out.
+
+            uiManager.ShowResults(stars);
         }
     }
 }

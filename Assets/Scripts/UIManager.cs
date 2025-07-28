@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -8,26 +6,58 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI timerText;
 
+    // --- NEW ---
+    [Header("Results Panel")]
+    [SerializeField] private GameObject resultsPanel;
+    [SerializeField] private TextMeshProUGUI starRatingText;
+    // -----------
+
+    void Start()
+    {
+        // Make sure the results panel is hidden when the game starts
+        if (resultsPanel != null)
+        {
+            resultsPanel.SetActive(false);
+        }
+    }
+
     void Update()
     {
-        // Check if the GameManager instance exists before trying to access it
-        if (GameManager.Instance != null)
+        if (GameManager.Instance != null && GameManager.Instance.currentState == GameManager.GameState.Playing)
         {
-            // Get the time remaining from the GameManager's public property
             float time = GameManager.Instance.timeRemaining;
+            if (time < 0) time = 0;
 
-            // Ensure time doesn't display as negative
-            if (time < 0)
-            {
-                time = 0;
-            }
-
-            // Format the time into minutes and seconds for display
             int minutes = Mathf.FloorToInt(time / 60);
             int seconds = Mathf.FloorToInt(time % 60);
 
-            // Update the text field. The "D2" format ensures two digits (e.g., 09)
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }
+
+    // --- NEW ---
+    // This public method will be called by the GameManager to show the final score.
+    public void ShowResults(int starRating)
+    {
+        if (resultsPanel != null)
+        {
+            resultsPanel.SetActive(true);
+
+            // Convert the integer rating to a string of stars
+            string stars = "";
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < starRating)
+                {
+                    stars += "★"; // A filled star
+                }
+                else
+                {
+                    stars += "☆"; // An empty star
+                }
+            }
+            starRatingText.text = stars;
+        }
+    }
+    // -----------------
 }
