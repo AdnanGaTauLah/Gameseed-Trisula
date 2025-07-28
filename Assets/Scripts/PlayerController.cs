@@ -15,18 +15,28 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float maxHorizontalVelocity = 6f;
-    [SerializeField] private float stopDamping = 0.9f; // Damping factor for stopping
+    [SerializeField] private float stopDamping = 0.9f;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 12f;
+    [SerializeField] private float fallGravityMultiplier = 2.5f;
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.1f;
     private bool isGrounded;
 
-    // Input storage
+    [Header("Feel & Polish")]
+    [SerializeField] private float coyoteTime = 0.1f;
+    private float coyoteTimeCounter;
+    [SerializeField] private float jumpBufferTime = 0.1f;
+    private float jumpBufferCounter;
+
     private Vector2 moveInput;
+
+    // --- NEW ---
+    private bool controlsEnabled = true;
+
 
     void Awake()
     {
@@ -34,10 +44,34 @@ public class PlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
+    void Update()
+    {
+        if (!controlsEnabled) return; // If controls are disabled, do nothing in Update.
+
+        if (isGrounded) { coyoteTimeCounter = coyoteTime; }
+        else { coyoteTimeCounter -= Time.deltaTime; }
+        jumpBufferCounter -= Time.deltaTime;
+    }
+
     void FixedUpdate()
     {
+        if (!controlsEnabled) return; // If controls are disabled, do nothing in FixedUpdate.
+
         CheckIfGrounded();
         HandleHorizontalMovement();
+        HandleGravity();
+    }
+
+    // --- NEW PUBLIC METHOD ---
+    public void SetControlsEnabled(bool isEnabled)
+    {
+        controlsEnabled = isEnabled;
+        if (!isEnabled)
+        {
+            // Immediately stop all movement when disabled
+            moveInput = Vector2.zero;
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private void CheckIfGrounded()
@@ -77,25 +111,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleGravity()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallGravityMultiplier - 1) * Time.fixedDeltaTime;
+        }
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
-        // --- MOVE DEBUGGING ---
-        Debug.Log($"'OnMove' event fired! Value: {context.ReadValue<Vector2>()}");
+        if (!controlsEnabled) { moveInput = Vector2.zero; return; }
         moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!controlsEnabled) return;
+
+        if (context.started) { jumpBufferCounter = jumpBufferTime; }
+        if (context.canceled && rb.velocity.y > 0f)
         {
-            Debug.Log($"'OnJump' event fired! Is the player grounded? -> {isGrounded}");
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            coyoteTimeCounter = 0f;
         }
 
-        if (context.performed && isGrounded)
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
-            Debug.Log("Conditions met! Applying jump force.");
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
         }
     }
 
@@ -105,4 +151,5 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(boxCollider.bounds.center + Vector3.down * groundCheckDistance, boxCollider.bounds.size);
     }
+
 }
