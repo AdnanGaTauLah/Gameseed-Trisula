@@ -6,14 +6,14 @@ using UnityEngine;
 public class PlayerMovementStats : ScriptableObject
 {
     [Header("Walk")] 
-    [Range(1f, 10f)] public float MaxWalkSpeed = 12.5f;
+    [Range(1f, 40f)] public float MaxWalkSpeed = 40.5f;
     [Range(0.25f, 50f)] public float GroundAcceleration = 5f;
     [Range(0.25f, 50f)] public float GroundDeceleration = 20f;
     [Range(0.25f, 50f)] public float AirAcceleration = 5f;
     [Range(0.25f, 50f)] public float AirDeceleration = 5f;
     
     [Header("Run")]
-    [Range(1f, 10f)] public float MaxRunSpeed = 20f;
+    [Range(1f, 100f)] public float MaxRunSpeed = 100f;
 
     [Header("Grounded/Collision Checks")] 
     public LayerMask GroundLayer;
@@ -53,6 +53,12 @@ public class PlayerMovementStats : ScriptableObject
     public bool DrawRight = true;
     [Range(5, 100)] public int ArcResolution = 20;
     [Range(0, 500)] public int VisualizationSteps = 90;
+    
+    [Header("Wall Mechanics")]
+    public LayerMask WallLayer;
+    public float WallSlideSpeed = 2f;
+    public Vector2 WallJumpForce = new Vector2(25f, 20f);
+    [Range(0f, 1f)] public float WallJumpInputFreezeTime = 0.1f;
     
     public float Gravity { get; private set; }
     public float InitialJumpVelocity { get; private set; }

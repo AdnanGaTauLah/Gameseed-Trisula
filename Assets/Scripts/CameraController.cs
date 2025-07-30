@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         initialZ = transform.position.z;
     }
 
-    void FixedUpdate() // Changed from LateUpdate to FixedUpdate for smoother physics-based tracking
+    void LateUpdate() // Changed from LateUpdate to FixedUpdate for smoother physics-based tracking
     {
         if (playerTarget != null)
         {

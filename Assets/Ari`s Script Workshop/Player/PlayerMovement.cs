@@ -11,25 +11,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Collider2D _bodyColl;
     
     private Rigidbody2D _rb;
+    private PlayerWallMechanics _wallMechanics;
     
     //movement vars
     private Vector2 _moveVelocity;
-    private bool _isFacingRight = true;
+    public bool _isFacingRight = true;
     
     //collision check vars
     private RaycastHit2D _groundHit;
     private RaycastHit2D _headHit;
-    private bool _isGrounded;
+    public bool _isGrounded;
     private bool _bumpedHead;
     
     //Jump vars
-    public float VerticalVelocity { get; private set; }
+    public float VerticalVelocity { get; set; }
     private bool _isJumping;
     private bool _isFastFalling;
     private bool _isFalling;
     private float _fastFallTime;
     private float _fastFallReleaseSpeed;
-    private int _numberofJumpUsed;
+    public int _numberofJumpUsed;
     
     //Apex Vars
     private float _apexPoint;
@@ -46,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _isFacingRight = true;
-        
         _rb = GetComponent<Rigidbody2D>();
     }
 
@@ -70,6 +70,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void ResetJump()
+    {
+        _numberofJumpUsed = 0;
+    }
+    
+    public void ConsumeAllAirJumps()
+    {
+        // Langsung set jumlah lompatan terpakai ke batas maksimum
+        _numberofJumpUsed = MoveStats.NumberofJumpsAllowed;
+    }
+    
     #region Movement
 
     private void Move(float acceleration, float deceleration, Vector2 moveInput)
@@ -134,12 +145,12 @@ public class PlayerMovement : MonoBehaviour
         if (turnRight)
         {
             _isFacingRight = true;
-            transform.Rotate(0f,180f,0f);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
             _isFacingRight = false;
-            transform.Rotate(0f,-180f,0f);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -425,6 +436,7 @@ public class PlayerMovement : MonoBehaviour
     }
     
     #endregion
+    
     #region  Collision Check
 
     private void IsGrounded()

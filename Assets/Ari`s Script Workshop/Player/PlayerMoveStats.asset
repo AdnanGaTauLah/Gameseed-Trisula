@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813d288f4162dcf4887f420f774df2e9, type: 3}
   m_Name: PlayerMoveStats
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 10
+  MaxWalkSpeed: 15
   GroundAcceleration: 34.1
   GroundDeceleration: 3.7
   AirAcceleration: 5
   AirDeceleration: 5
-  MaxRunSpeed: 10
+  MaxRunSpeed: 20
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -43,3 +43,9 @@ MonoBehaviour:
   DrawRight: 1
   ArcResolution: 20
   VisualizationSteps: 90
+  WallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  WallSlideSpeed: 0.5
+  WallJumpForce: {x: 25, y: 20}
+  WallJumpInputFreezeTime: 1
