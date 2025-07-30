@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody2D _rb;
     private PlayerWallMechanics _wallMechanics;
+    private PlayerGrindMechanics _grindMechanics;
     
     //movement vars
     private Vector2 _moveVelocity;
@@ -48,12 +49,18 @@ public class PlayerMovement : MonoBehaviour
     {
         _isFacingRight = true;
         _rb = GetComponent<Rigidbody2D>();
+        _grindMechanics = GetComponentInChildren<PlayerGrindMechanics>();
     }
 
     private void Update()
     {
         CountTimers();
         JumpChecks();
+        
+        if ((_wallMechanics != null && _wallMechanics.IsWallActionActive) || (_grindMechanics != null && _grindMechanics.IsGrinding))
+        {
+            return;
+        }
     }
     private void FixedUpdate()
     {
@@ -68,17 +75,46 @@ public class PlayerMovement : MonoBehaviour
         {
             Move(MoveStats.AirAcceleration, MoveStats.AirDeceleration, InputManager.Movement);
         }
+        
+        if ((_wallMechanics != null && _wallMechanics.IsWallActionActive) || (_grindMechanics != null && _grindMechanics.IsGrinding))
+        {
+            return;
+        }
     }
 
+    public void PerformWallJump(float jumpDirection)
+    {
+        // 1. Set status player menjadi sedang melompat
+        if (!_isJumping)
+        {
+            _isJumping = true;
+        }
+    
+        // 2. Langsung habiskan semua jatah lompatan di udara
+        _numberofJumpUsed = MoveStats.NumberofJumpsAllowed;
+
+        // 3. Hentikan semua kecepatan saat ini untuk lompatan yang konsisten
+        _rb.velocity = Vector2.zero;
+        VerticalVelocity = 0;
+
+        // 4. Terapkan gaya lompatan
+        Vector2 force = new Vector2(MoveStats.WallJumpForce.x * jumpDirection, MoveStats.WallJumpForce.y);
+        _rb.AddForce(force, ForceMode2D.Impulse);
+    
+        // 5. Pastikan player berbalik arah setelah melompat dari dinding
+        if (jumpDirection > 0)
+        {
+            Turn(true); // Berbalik ke kanan
+        }
+        else
+        {
+            Turn(false); // Berbalik ke kiri
+        }
+    }
+    
     public void ResetJump()
     {
         _numberofJumpUsed = 0;
-    }
-    
-    public void ConsumeAllAirJumps()
-    {
-        // Langsung set jumlah lompatan terpakai ke batas maksimum
-        _numberofJumpUsed = MoveStats.NumberofJumpsAllowed;
     }
     
     #region Movement
@@ -160,6 +196,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void JumpChecks()
     {
+        if (_wallMechanics != null && _wallMechanics.IsWallActionActive)
+        {
+            return; 
+        }
+        
         if (InputManager.JumpWasPressed)
         {
             _jumpBufferTimer = MoveStats.JumpBufferTime;

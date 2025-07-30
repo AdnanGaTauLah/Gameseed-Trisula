@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="efa1ae4e-f877-4576-9038-93dc28ecf27f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMoveStats.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMoveStats.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovementStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovementStats.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +19,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerGrindMechanics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -104,7 +103,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1753846921148</updated>
-      <workItem from="1753846922811" duration="2918000" />
+      <workItem from="1753846922811" duration="7348000" />
     </task>
     <servers />
   </component>

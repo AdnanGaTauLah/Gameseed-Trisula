@@ -21,8 +21,8 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
-  GroundDetectionRayLength: 1
-  HeadDetectionRayLength: 1
+  GroundDetectionRayLength: 0.2
+  HeadDetectionRayLength: 0.2
   HeadWidth: 0.75
   JumpHeight: 6.5
   JumpHeightCompensationFactor: 1.054
@@ -46,6 +46,12 @@ MonoBehaviour:
   WallLayer:
     serializedVersion: 2
     m_Bits: 128
-  WallSlideSpeed: 0.5
+  WallStickTime: 10
+  WallSlideSpeed: 0.1
   WallJumpForce: {x: 25, y: 20}
   WallJumpInputFreezeTime: 1
+  GrindableLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  GrindSpeed: 100
+  GrindJumpForce: 20
