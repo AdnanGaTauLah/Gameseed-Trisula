@@ -83,8 +83,8 @@ public class PlayerMovementStats : ScriptableObject
 
     [Header("Grind Mechanics")]
     public LayerMask GrindableLayer;
-    [Range(5f, 100f)] public float GrindSpeed = 30f;
-    [Range(5f, 50f)] public float GrindJumpForce = 20f;
+    [Range(5f, 100f)] public float GrindSpeed = 70f;
+    [Range(5f, 50f)] public float GrindJumpForce = 40f;
     
     #endregion
     
