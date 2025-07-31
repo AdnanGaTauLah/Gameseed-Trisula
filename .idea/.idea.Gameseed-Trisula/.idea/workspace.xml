@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="efa1ae4e-f877-4576-9038-93dc28ecf27f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovementStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovementStats.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -35,6 +40,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Feature/MovementParkour&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -102,6 +108,8 @@
       <option name="presentableId" value="Default" />
       <updated>1753846921148</updated>
       <workItem from="1753846922811" duration="9110000" />
+      <workItem from="1753901412249" duration="622000" />
+      <workItem from="1753902050996" duration="5430000" />
     </task>
     <servers />
   </component>

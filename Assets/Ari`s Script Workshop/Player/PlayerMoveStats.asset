@@ -55,3 +55,7 @@ MonoBehaviour:
     m_Bits: 256
   GrindSpeed: 100
   GrindJumpForce: 50
+  StunDuration: 0.5
+  KnockbackForce: 4.08
+  KnockbackUpwardModifier: 0.184
+  TrampolineBounceForce: 35

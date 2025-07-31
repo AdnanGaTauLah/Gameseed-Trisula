@@ -87,6 +87,16 @@ public class PlayerMovementStats : ScriptableObject
     [Range(5f, 50f)] public float GrindJumpForce = 40f;
     
     #endregion
+
+    #region Hazards and Interactive Objects Header
+
+    [Header("Hazards & Interactive")]
+    [Range(0.1f, 2f)] public float StunDuration = 0.5f;
+    [Range(0f, 10f)] public float KnockbackForce = 0.1f; 
+    [Range(0f, 1f)] public float KnockbackUpwardModifier = 0.4f; 
+    [Range(5f, 100f)] public float TrampolineBounceForce = 35f;
+
+    #endregion
     
     public float Gravity { get; private set; }
     public float InitialJumpVelocity { get; private set; }

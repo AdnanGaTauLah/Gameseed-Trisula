@@ -16,6 +16,8 @@ public class PlayerWallMechanics : MonoBehaviour
     private bool _isWallSliding;
     private float _wallJumpFreezeTimer;
     private float _wallStickTimer;
+    private GameObject _currentWallObject;
+    
 
     public bool IsWallActionActive => _isWallSliding || _wallJumpFreezeTimer > 0;
 
@@ -42,67 +44,64 @@ public class PlayerWallMechanics : MonoBehaviour
     private void CheckIfTouchingWall()
     {
         float castDirection = _playerMovement._isFacingRight ? 1f : -1f;
-        _isTouchingWall = Physics2D.BoxCast(
-            _wallCheckPoint.position,
-            _wallCheckSize,
-            0f,
-            new Vector2(castDirection, 0f),
-            0.1f,
-            _stats.WallLayer
-        );
+        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckSize,
+                0f, new Vector2(castDirection, 0f), 0.1f, _stats.WallLayer
+            );
+        if (hit.collider != null)
+        {
+            _isTouchingWall = true;
+            _currentWallObject = hit.collider.gameObject; // Simpan GameObject-nya
+        }
+        else
+        {
+            _isTouchingWall = false;
+            _currentWallObject = null;
+        }
     }
 
     private void HandleWallSlide()
-    {
+    { 
         float moveInputDirection = InputManager.Movement.x;
-        float playerFacingDirection = _playerMovement._isFacingRight ? 1f : -1f;
+    float playerFacingDirection = _playerMovement._isFacingRight ? 1f : -1f;
 
-        // Kondisi utama untuk semua aksi dinding
-        bool canBeOnWall = _isTouchingWall && !_playerMovement._isGrounded;
-
-        if (canBeOnWall)
+    // Kondisi 1: Apakah secara fisik memungkinkan untuk berada di dinding?
+    bool canBeOnWall = _isTouchingWall && !_playerMovement._isGrounded;
+    // Kondisi 2: Apakah pemain secara sengaja menekan tombol ke arah dinding?
+    bool isPushingAgainstWall = moveInputDirection * playerFacingDirection > 0; // Cek jika arah input sama dengan arah hadap
+    // Pemain hanya akan masuk ke status wall slide jika KEDUA kondisi terpenuhi
+    if (canBeOnWall && isPushingAgainstWall)
+    {
+        // Jika ini adalah frame PERTAMA saat wall slide dimulai...
+        if (!_isWallSliding)
         {
-            // Cek jika pemain menekan tombol ke arah dinding
-            bool isPushingAgainstWall = moveInputDirection == playerFacingDirection;
-
-            // Jika pertama kali menempel di dinding
-            if (!_isWallSliding)
+            _isWallSliding = true;
+            if (_playerMovement.IsNewWall(_currentWallObject))
             {
-                _isWallSliding = true;
                 _playerMovement.ResetJump();
-                // Mulai timer "lengket"
-                _wallStickTimer = _stats.WallStickTime;
             }
-
-            // Jika sedang menempel dan timer masih berjalan
-            if (_wallStickTimer > 0)
-            {
-                // Tahan player agar tidak jatuh (efek lengket)
-                _rb.velocity = new Vector2(0, 0);
-
-                // Kurangi timer hanya jika pemain menekan ke arah dinding
-                if (isPushingAgainstWall)
-                {
-                    _wallStickTimer -= Time.deltaTime;
-                }
-            }
-            else // Setelah timer habis, baru mulai merosot
-            {
-                // Pemain hanya akan merosot jika masih menekan tombol ke arah dinding
-                if (isPushingAgainstWall)
-                {
-                    _rb.velocity = new Vector2(0f, -_stats.WallSlideSpeed);
-                }
-                else // Jika tombol dilepas, pemain akan jatuh bebas
-                {
-                    _isWallSliding = false;
-                }
-            }
+            _wallStickTimer = _stats.WallStickTime;
         }
-        else // Jika tidak lagi menyentuh dinding
+
+        // Logika untuk menempel sesaat (wall stick)
+        if (_wallStickTimer > 0)
         {
-            _isWallSliding = false;
+            _rb.velocity = new Vector2(0, 0);
+            _wallStickTimer -= Time.deltaTime;
         }
+        else // Setelah "lengket", baru mulai merosot
+        {
+            _rb.velocity = new Vector2(0f, -_stats.WallSlideSpeed);
+        }
+    }
+    else // Jika pemain tidak lagi di dinding ATAU melepaskan tombol arah
+    {
+        // Jika sebelumnya sedang sliding, reset timer agar siap untuk slide berikutnya
+        if (_isWallSliding)
+        {
+            _wallStickTimer = 0; 
+        }
+        _isWallSliding = false;
+    }
     }
 
     private void HandleWallJump()
@@ -111,9 +110,9 @@ public class PlayerWallMechanics : MonoBehaviour
         {
             float jumpDirection = _playerMovement._isFacingRight ? -1f : 1f;
 
-            // --- CUKUP PANGGIL METODE DARI PLAYER MOVEMENT ---
             _playerMovement.PerformWallJump(jumpDirection);
-            // ------------------------------------------------
+            // --- CATAT DINDING INI KE MEMORI ---
+            _playerMovement.SetLastWall(_currentWallObject);
 
             _wallJumpFreezeTimer = _stats.WallJumpInputFreezeTime;
             _isWallSliding = false; // Langsung hentikan status slide

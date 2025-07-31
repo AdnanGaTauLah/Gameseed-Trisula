@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private PlayerWallMechanics _wallMechanics;
     private PlayerGrindMechanics _grindMechanics;
+    private GameObject _lastWallJumpedFrom;
+    private bool _isStunned = false;
+    
     
     //movement vars
     private Vector2 _moveVelocity;
@@ -44,7 +47,8 @@ public class PlayerMovement : MonoBehaviour
     
     //Coyote Time
     private float _coyoteTimer;
-
+    
+    
     private void Awake()
     {
         _isFacingRight = true;
@@ -54,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (_isStunned) return;
+        
         CountTimers();
         JumpChecks();
         
@@ -64,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (_isStunned) return;
+        
         CollisionCheck();
         Jump();
 
@@ -81,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
     }
-
     public void PerformWallJump(float jumpDirection)
     {
         // 1. Set status player menjadi sedang melompat
@@ -110,12 +117,25 @@ public class PlayerMovement : MonoBehaviour
         {
             Turn(false); // Berbalik ke kiri
         }
+        
     }
     
     public void ResetJump()
     {
         _numberofJumpUsed = 0;
     }
+    
+    public void SetLastWall(GameObject wall)
+    {
+        _lastWallJumpedFrom = wall;
+    }
+
+    // Metode ini untuk bertanya apakah dinding yang disentuh sekarang adalah dinding baru
+    public bool IsNewWall(GameObject wall)
+    {
+        return _lastWallJumpedFrom != wall;
+    }
+    
     
     #region Movement
 
@@ -137,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
             _rb.velocity = new Vector2(_moveVelocity.x , _rb.velocity.y);
         }*/
         // Jika ada input dari pemain (tombol gerak ditekan)
+        #endregion
         if (moveInput != Vector2.zero)
         {
             TurnCheck(moveInput);
@@ -161,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
         }
         // Terapkan kecepatan kalkulasi ke Rigidbody
         _rb.velocity = new Vector2(_moveVelocity.x, _rb.velocity.y);
-        #endregion
+        
     }
 
     private void TurnCheck(Vector2 moveInput)
@@ -265,6 +286,7 @@ public class PlayerMovement : MonoBehaviour
             _fastFallTime = 0f;
             _isPastApexThreshold = false;
             _numberofJumpUsed = 0;
+            _lastWallJumpedFrom = null;
             
             VerticalVelocity = Physics2D.gravity.y;
         }
@@ -476,6 +498,65 @@ public class PlayerMovement : MonoBehaviour
     _rb.velocity = new Vector2(_rb.velocity.x, VerticalVelocity);
     }
     
+    #endregion
+
+    #region Stun and Knockback
+
+    public void ApplyKnockbackAndStun(Vector2 knockbackDirection)
+    {
+        if (!_isStunned) // Pastikan tidak memanggil knockback berkali-kali
+        {
+            StartCoroutine(KnockbackAndStunCoroutine(knockbackDirection));
+        }
+    }
+
+    private IEnumerator KnockbackAndStunCoroutine(Vector2 knockbackDirection)
+    {
+        // 1. Masuk ke mode stun
+        _isStunned = true;
+
+        // 2. Hentikan total semua kecepatan awal pemain agar knockback konsisten
+        _rb.velocity = Vector2.zero;
+        VerticalVelocity = 0;
+        _moveVelocity = Vector2.zero;
+
+        // 3. ATUR KECEPATAN KNOCKBACK SECARA LANGSUNG (LEBIH STABIL)
+        Vector2 knockbackVelocity = new Vector2(knockbackDirection.x * MoveStats.KnockbackForce, MoveStats.KnockbackUpwardModifier * MoveStats.KnockbackForce);
+        _rb.velocity = knockbackVelocity;
+
+        // Di sini bisa memutar animasi "stun" dan sound effect
+        // Contoh: animator.SetTrigger("Stunned");
+        // Contoh: audioSource.PlayOneShot(stunSound);
+
+        // 4. Tunggu selama durasi stun
+        yield return new WaitForSeconds(MoveStats.StunDuration);
+
+        // 5. Keluar dari mode stun
+        _isStunned = false;
+    }
+
+    #endregion
+
+    #region Trampoline
+
+    public void BounceOnTrampoline()
+    {
+        // 1. Reset status lompat dan jatuh
+        _isJumping = true;
+        _isFalling = false;
+        _isFastFalling = false;
+        _fastFallTime = 0f;
+        _isPastApexThreshold = false;
+        _numberofJumpUsed = 0; // Reset jatah lompat!
+        _lastWallJumpedFrom = null;
+
+        // Di sini kamu bisa putar animasi & sound effect pantulan
+
+        // 2. Berikan kecepatan vertikal yang kuat
+        VerticalVelocity = MoveStats.TrampolineBounceForce;
+        _rb.velocity = new Vector2(_rb.velocity.x, VerticalVelocity);
+    }
+
     #endregion
     
     #region  Collision Check
