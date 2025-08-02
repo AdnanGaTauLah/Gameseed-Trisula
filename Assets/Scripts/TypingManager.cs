@@ -8,7 +8,7 @@ public class TypingManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI targetSentenceText;
     [SerializeField] private TextMeshProUGUI playerInputText;
-    [SerializeField] private TextMeshProUGUI feedbackText; // For "Salah!" pop-up
+    [SerializeField] private TextMeshProUGUI feedbackText;
 
     [Header("Sentences")]
     [SerializeField] private string[] sentencePool;
@@ -17,28 +17,13 @@ public class TypingManager : MonoBehaviour
     [SerializeField] private ParticleSystem successParticles;
     [SerializeField] private float feedbackDisplayDuration = 1.0f;
 
-    private AudioSource audioSource;
-    private AudioClip correctKeySound;
-    private AudioClip errorKeySound;
-    private AudioClip successSound;
-
     private string currentTargetSentence;
     private string currentPlayerInput = "";
-
     private Coroutine feedbackCoroutine;
-
-    // --- BUG FIX ---
-    // This flag prevents input from being processed on the same frame the manager is activated.
     private bool acceptInput = false;
-    // ---------------
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        correctKeySound = CreateTone(880, 0.05f);
-        errorKeySound = CreateTone(165, 0.2f);
-        successSound = CreateTone(1046, 0.3f);
-
         if (feedbackText != null)
         {
             feedbackText.text = "";
@@ -49,16 +34,11 @@ public class TypingManager : MonoBehaviour
     {
         if (gameObject.activeInHierarchy)
         {
-            // --- BUG FIX ---
-            // On the first frame this object is active, we set the flag to true
-            // but skip the rest of the Update loop.
             if (!acceptInput)
             {
                 acceptInput = true;
                 return;
             }
-            // ---------------
-
             HandleHardStopInput();
         }
     }
@@ -88,7 +68,8 @@ public class TypingManager : MonoBehaviour
                     if (c == expectedChar)
                     {
                         currentPlayerInput += c;
-                        audioSource.PlayOneShot(correctKeySound, 0.7f);
+                        // --- AUDIO CALL ---
+                        AudioManager.Instance.PlaySound("Typing_Key_Correct", transform.position);
 
                         if (feedbackCoroutine != null)
                         {
@@ -112,11 +93,7 @@ public class TypingManager : MonoBehaviour
         gameObject.SetActive(true);
         currentPlayerInput = "";
         playerInputText.text = "";
-
-        // --- BUG FIX ---
-        // Reset the flag every time a new challenge starts.
         acceptInput = false;
-        // ---------------
 
         if (feedbackText != null) feedbackText.text = "";
 
@@ -145,7 +122,8 @@ public class TypingManager : MonoBehaviour
 
     private void TriggerErrorFeedback()
     {
-        audioSource.PlayOneShot(errorKeySound);
+        // --- AUDIO CALL ---
+        AudioManager.Instance.PlaySound("Typing_Key_Error", transform.position);
 
         if (feedbackCoroutine != null)
         {
@@ -157,12 +135,9 @@ public class TypingManager : MonoBehaviour
     private IEnumerator ShowFeedbackPopup(string message)
     {
         if (feedbackText == null) yield break;
-
         feedbackText.text = message;
         feedbackText.alpha = 1f;
-
         yield return new WaitForSeconds(feedbackDisplayDuration);
-
         feedbackText.text = "";
         feedbackCoroutine = null;
     }
@@ -170,31 +145,16 @@ public class TypingManager : MonoBehaviour
     private IEnumerator SuccessSequence()
     {
         Debug.Log("Typing Correct!");
-        audioSource.PlayOneShot(successSound);
+        // --- AUDIO CALL ---
+        AudioManager.Instance.PlaySound("Typing_Success", transform.position);
 
         if (successParticles != null)
         {
             successParticles.Play();
         }
-
         yield return new WaitForSeconds(0.5f);
-
         gameObject.SetActive(false);
         GameManager.Instance.FinishGame();
     }
 
-    private AudioClip CreateTone(int frequency, float duration)
-    {
-        int sampleRate = 44100;
-        int sampleCount = (int)(sampleRate * duration);
-        float[] samples = new float[sampleCount];
-        for (int i = 0; i < sampleCount; i++)
-        {
-            float t = (float)i / sampleRate;
-            samples[i] = Mathf.Sin(2 * Mathf.PI * frequency * t) * (1 - t / duration);
-        }
-        AudioClip clip = AudioClip.Create("Tone", sampleCount, 1, sampleRate, false);
-        clip.SetData(samples, 0);
-        return clip;
-    }
 }

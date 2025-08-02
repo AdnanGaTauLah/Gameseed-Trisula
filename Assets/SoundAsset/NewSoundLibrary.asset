@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144e624ff2160794fa409584fe5bc654, type: 3}
+  m_Name: NewSoundLibrary
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Player_Jump
+    clip: {fileID: 8300000, guid: 3d010990fdcb87b4598cd8990b8717e9, type: 3}
+    volume: 0
+    pitch: 0.1
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Player_Land
+    clip: {fileID: 8300000, guid: 49d1867a1d4004f49bac86be1fb7a4bd, type: 3}
+    volume: 0
+    pitch: 0.1
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Player_WallJump
+    clip: {fileID: 8300000, guid: e8c9053b6c18a194abdc5f1935abd44d, type: 3}
+    volume: 1
+    pitch: 0
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Player_GrindJump
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Player_Hurt
+    clip: {fileID: 8300000, guid: bcdbe1091a4b6bd4a961b75fc4a8220b, type: 3}
+    volume: 0
+    pitch: 0
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Trampoline_Bounce
+    clip: {fileID: 8300000, guid: 4671371798c1d5748bf15c7f5667caa2, type: 3}
+    volume: 0
+    pitch: 0
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Typingkey_Correct
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0.1
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Typingkey_Error
+    clip: {fileID: 8300000, guid: 91199460faa3c324eb5f6ee1024393cf, type: 3}
+    volume: 0
+    pitch: 0.1
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Typingkey_Success
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    isLooping: 0
+    source: {fileID: 0}
+  - name: Player_Grind_Loop
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0.1
+    isLooping: 1
+    source: {fileID: 0}
+  - name: Player_Walk_Loop
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0.1
+    isLooping: 1
+    source: {fileID: 0}
+  - name: Player_Run_Loop
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0.1
+    isLooping: 1
+    source: {fileID: 0}
+  - name: Player_WallSlide_Loop
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0.1
+    isLooping: 1
+    source: {fileID: 0}
