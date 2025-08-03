@@ -4,9 +4,10 @@ using TMPro; // Required for TextMeshPro
 public class DeliveryZone : MonoBehaviour
 {
     [Header("UI Feedback")]
-    [SerializeField] private GameObject interactPrompt; // The pop-up UI element
+    [SerializeField] private GameObject interactPrompt; // Use GameObject to easily show/hide
 
     private bool playerIsInRange = false;
+    private PlayerMovement playerInRange; // --- NEW --- Store a reference to the player
 
     void Start()
     {
@@ -21,14 +22,16 @@ public class DeliveryZone : MonoBehaviour
     {
         if (playerIsInRange && InputManager.InteractWasPressed)
         {
-            Debug.Log("Interact key pressed while in range!");
-
             if (GameManager.Instance != null)
             {
-                // Hide the prompt immediately when interaction is successful
                 if (interactPrompt != null)
                 {
                     interactPrompt.SetActive(false);
+                }
+                // --- NEW --- Ensure the player is no longer considered in the zone
+                if (playerInRange != null)
+                {
+                    playerInRange.IsInInteractZone = false;
                 }
                 GameManager.Instance.StartTypingPhase();
             }
@@ -41,8 +44,7 @@ public class DeliveryZone : MonoBehaviour
         {
             playerIsInRange = true;
             Debug.Log("Player entered delivery zone.");
-
-            // Show the pop-up
+            // Show the prompt
             if (interactPrompt != null)
             {
                 interactPrompt.SetActive(true);
@@ -56,8 +58,7 @@ public class DeliveryZone : MonoBehaviour
         {
             playerIsInRange = false;
             Debug.Log("Player exited delivery zone.");
-
-            // Hide the pop-up
+            // Hide the prompt
             if (interactPrompt != null)
             {
                 interactPrompt.SetActive(false);
