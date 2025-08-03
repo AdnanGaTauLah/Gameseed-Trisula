@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         if (playerInput == null)
         {
-            //Debug.LogError("InputManager: PlayerInput component not found on this GameObject!");
+            Debug.LogError("InputManager: PlayerInput component not found on this GameObject!");
             return;
         }
 
@@ -58,7 +58,7 @@ public class InputManager : MonoBehaviour
         // --- ADDED DEBUG LOG ---
         // This will print the movement input to the console.
         // If you see this value change when you press A/D, the input is being read correctly.
-        //Debug.Log("Movement Input: " + Movement);
+        Debug.Log("Movement Input: " + Movement);
     }
 
     // Helper function to find actions and provide a clear error message if not found.

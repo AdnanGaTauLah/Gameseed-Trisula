@@ -7,12 +7,9 @@
     <list default="true" id="efa1ae4e-f877-4576-9038-93dc28ecf27f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/InputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Prefab/Arena.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Prefab/Arena.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/PlayerStunnedAnimation.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Character/PlayerStunnedAnimation.anim.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

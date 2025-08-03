@@ -27,11 +27,11 @@ public class CameraController : MonoBehaviour
         mainCamera = GetComponent<Camera>();
         if (playerTarget == null)
         {
-            Debug.LogError("CameraController: Player Target is not assigned!");
+            //Debug.LogError("CameraController: Player Target is not assigned!");
         }
         if (cameraBounds == null)
         {
-            Debug.LogError("CameraController: Camera Bounds are not assigned!");
+            //Debug.LogError("CameraController: Camera Bounds are not assigned!");
         }
         initialZ = transform.position.z;
     }
