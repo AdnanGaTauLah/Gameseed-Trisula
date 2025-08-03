@@ -46,7 +46,7 @@ public class InputManager : MonoBehaviour
     {
         // Read values every frame
         Movement = _moveAction.ReadValue<Vector2>();
-
+        Debug.Log("SUMBER INPUT MANAGER membaca Movement.x = " + Movement.x);
         JumpWasPressed = _jumpAction.WasPressedThisFrame();
         JumpIsHeld = _jumpAction.IsPressed();
         JumpWasReleased = _jumpAction.WasReleasedThisFrame();

@@ -12,35 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813d288f4162dcf4887f420f774df2e9, type: 3}
   m_Name: PlayerMoveStats
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 20
-  GroundAcceleration: 34.1
-  GroundDeceleration: 3.7
-  AirAcceleration: 5
-  AirDeceleration: 5
-  MaxRunSpeed: 25
+  MaxWalkSpeed: 2
+  GroundAcceleration: 20
+  GroundDeceleration: 30
+  AirAcceleration: 10
+  AirDeceleration: 15
+  MaxRunSpeed: 3
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
   GroundDetectionRayLength: 0.2
   HeadDetectionRayLength: 0.2
   HeadWidth: 0.75
-  JumpHeight: 6.5
-  JumpHeightCompensationFactor: 1.054
-  TimeTillJumpApex: 0.6
-  GravityOnReleaseMultiplier: 2
-  MaxFallSpeed: 20
+  JumpHeight: 1
+  JumpHeightCompensationFactor: 1
+  TimeTillJumpApex: 0.5
+  GravityOnReleaseMultiplier: 2.5
+  MaxFallSpeed: 10
   NumberofJumpsAllowed: 2
-  TimeForUpwardsCancel: 0.027
-  ApexTreshold: 0.97
-  ApexHangTime: 0.01
-  JumpBufferTime: 0.19
-  JumpCoyoteTime: 0.1
+  TimeForUpwardsCancel: 0.212
+  ApexTreshold: 0.858
+  ApexHangTime: 0.135
+  JumpBufferTime: 0.522
+  JumpCoyoteTime: 0.597
   DebugShowIsGrounded: 1
   DebugShowHeadBumpBox: 1
-  ShowWalkJumpArc: 1
-  ShowRunJumpArc: 1
-  StopOnCollision: 1
-  DrawRight: 1
+  ShowWalkJumpArc: 0
+  ShowRunJumpArc: 0
+  StopOnCollision: 0
+  DrawRight: 0
   ArcResolution: 20
   VisualizationSteps: 90
   WallLayer:
@@ -56,6 +56,6 @@ MonoBehaviour:
   GrindSpeed: 100
   GrindJumpForce: 50
   StunDuration: 0.5
-  KnockbackForce: 4.08
-  KnockbackUpwardModifier: 0.184
-  TrampolineBounceForce: 35
+  KnockbackForce: 1.32
+  KnockbackUpwardModifier: 0.063
+  TrampolineBounceForce: 5

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3706886350938644791}
   - component: {fileID: 1467732502284363686}
   - component: {fileID: 4246994278275594090}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'reklame tembok satu arah(32x128) '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2503573534131422936}
   - component: {fileID: 3820946746737647196}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: gedung besar (464x400)  (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 7993381063839858008}
   - component: {fileID: 5131278591516421598}
   - component: {fileID: 902023242993769680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: reklame tembok dua arah(48x128)  (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 2629570732600846186}
   - component: {fileID: 2217688582159610369}
   - component: {fileID: 7950265824315094835}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'reklame tembok dua arah(48x128) '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4740,7 +4740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1218778928900494319}
   - component: {fileID: 2399281735162687457}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: gedung besar (464x400)  (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4825,7 +4825,7 @@ GameObject:
   - component: {fileID: 6696032723027991054}
   - component: {fileID: 992366495782285521}
   - component: {fileID: 2088799058653279379}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: reklame tembok dua arah(48x128)  (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5676,7 +5676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8857298266635585472}
   - component: {fileID: 159708033026555947}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: 'gedung besar (464x400) '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6494,7 +6494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 129639975887184326}
   - component: {fileID: 8691431967838931018}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: gedung besar (464x400)  (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8850,7 +8850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8501012462919098719}
   - component: {fileID: 5666138449731593992}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: gedung besar (464x400)  (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9098,7 +9098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7762406888693700925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall_Reklame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10568,7 +10568,7 @@ GameObject:
   - component: {fileID: 8267969797755917624}
   - component: {fileID: 4668103313917535929}
   - component: {fileID: 5664530528181804319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: reklame tembok satu arah(32x128)  (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11743,7 +11743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6264437488820840795}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Gedung Besar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12527,7 +12527,7 @@ GameObject:
   - component: {fileID: 3793146343852665526}
   - component: {fileID: 1362660691036797765}
   - component: {fileID: 7475942543675693400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: reklame tembok satu arah(32x128)  (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
