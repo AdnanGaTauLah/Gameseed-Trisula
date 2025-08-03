@@ -60,6 +60,11 @@ public class PlayerAnimator : MonoBehaviour
 
     private void HandleJumpTriggers()
     {
+        // --- NEW CONDITION ---
+        // If we are in an interact zone, do not trigger any jump animations.
+        if (playerMovement.IsInInteractZone) return;
+        // ---------------------
+
         if (InputManager.JumpWasPressed)
         {
             if (playerMovement._numberofJumpUsed > 0 && !playerMovement._isGrounded && !playerWallMechanics.IsWallActionActive)

@@ -1,48 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using TMPro; // Required for TextMeshPro
 
 public class DeliveryZone : MonoBehaviour
 {
+    [Header("UI Feedback")]
+    [SerializeField] private GameObject interactPrompt; // Use GameObject to easily show/hide
+
     private bool playerIsInRange = false;
+    private PlayerMovement playerInRange; // --- NEW --- Store a reference to the player
 
-    // This function is called by the PlayerInput component when the "Interact" action is performed.
-    public void OnInteract(InputAction.CallbackContext context)
+    void Start()
     {
-        // We only care about the moment the button is pressed down.
-        if (context.performed && playerIsInRange)
+        // Ensure the prompt is hidden when the game starts
+        if (interactPrompt != null)
         {
-            Debug.Log("Interact key pressed while in range!");
+            interactPrompt.SetActive(false);
+        }
+    }
 
-            // Tell the GameManager to switch states.
+    void Update()
+    {
+        if (playerIsInRange && InputManager.InteractWasPressed)
+        {
             if (GameManager.Instance != null)
             {
+                if (interactPrompt != null)
+                {
+                    interactPrompt.SetActive(false);
+                }
+                // --- NEW --- Ensure the player is no longer considered in the zone
+                if (playerInRange != null)
+                {
+                    playerInRange.IsInInteractZone = false;
+                }
                 GameManager.Instance.StartTypingPhase();
             }
         }
     }
 
-    // When the player enters the trigger collider...
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the object that entered is the player (by checking for the PlayerController script)
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerMovement>() != null)
         {
             playerIsInRange = true;
             Debug.Log("Player entered delivery zone.");
-            // We could also show a UI prompt here like "[E] to Deliver"
+            // Show the prompt
+            if (interactPrompt != null)
+            {
+                interactPrompt.SetActive(true);
+            }
         }
     }
 
-    // When the player exits the trigger collider...
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerMovement>() != null)
         {
             playerIsInRange = false;
             Debug.Log("Player exited delivery zone.");
-            // We would hide the UI prompt here.
+            // Hide the prompt
+            if (interactPrompt != null)
+            {
+                interactPrompt.SetActive(false);
+            }
         }
     }
 }

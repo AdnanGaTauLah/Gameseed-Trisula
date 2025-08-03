@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _jumpReleaseDuringBuffer;
 
     private float _coyoteTimer;
+    public bool IsFrozen { set { _isStunned = value; } }
+    public bool IsInInteractZone { get; set; } = false;
 
 
     private void Awake()
@@ -52,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _grindMechanics = GetComponentInChildren<PlayerGrindMechanics>();
         _audioSource = GetComponent<AudioSource>(); // --- AUDIO --- Get the component
+        // Add this line inside the Awake() function of PlayerMovement.cs
+        // GameManager.Instance.RegisterPlayer(this.GetComponent<PlayerController>());
+        // // Or if PlayerMovement and PlayerController are the same script:
+        GameManager.Instance.RegisterPlayer(this);
     }
 
     private void Update()
@@ -160,6 +166,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void JumpChecks()
     {
+        // --- NEW CONDITION ---
+        // If we are in an interact zone, do not process any jump checks.
+        if (IsInInteractZone) return;
+        // ---------------------
+
         if (_wallMechanics != null && _wallMechanics.IsWallActionActive) { return; }
         if (InputManager.JumpWasPressed) { _jumpBufferTimer = MoveStats.JumpBufferTime; _jumpReleaseDuringBuffer = false; }
         if (InputManager.JumpWasReleased)
