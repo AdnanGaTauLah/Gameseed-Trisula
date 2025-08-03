@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
         CollisionCheck();
         Jump();
-
+        Debug.Log("TUJUAN PlayerMovement menerima Movement.x = " + InputManager.Movement.x);
         if (_isGrounded)
         {
             Move(MoveStats.GroundAcceleration, MoveStats.GroundDeceleration, InputManager.Movement);
@@ -116,19 +116,32 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(float acceleration, float deceleration, Vector2 moveInput)
     {
+        string debugMessage = "";
+        
         if (moveInput != Vector2.zero)
         {
             TurnCheck(moveInput);
             Vector2 targetVelocity;
+            
+            float previousMoveVelocityX = _moveVelocity.x;
+            
             if (InputManager.RunIsHeld)
             {
                 targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
+                debugMessage =
+                    $"[RUNNING] Input: {moveInput.x:F2}, MaxSpeed: {MoveStats.MaxRunSpeed}, TargetV: {targetVelocity.x:F2}";
             }
             else
             {
                 targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxWalkSpeed;
+                debugMessage = $"[WALKING] Input: {moveInput.x:F2}, MaxSpeed: {MoveStats.MaxWalkSpeed}, TargetV: {targetVelocity.x:F2}";
             }
             _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+            
+            debugMessage += $", PrevV: {previousMoveVelocityX:F2}, NewV: {_moveVelocity.x:F2}";
+        
+            // Cetak semua informasi ke Console
+            Debug.Log(debugMessage);
         }
         else
         {
@@ -136,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
             _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, deceleration * Time.fixedDeltaTime);
         }
         _rb.velocity = new Vector2(_moveVelocity.x, _rb.velocity.y);
+        
     }
 
     private void TurnCheck(Vector2 moveInput)

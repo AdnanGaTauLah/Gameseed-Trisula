@@ -45,7 +45,7 @@ public class PlayerWallMechanics : MonoBehaviour
     private void CheckIfTouchingWall()
     {
         float castDirection = _playerMovement._isFacingRight ? 1f : -1f;
-        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckSize, 0f, new Vector2(castDirection, 0f), 0.1f, _stats.WallLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckSize, 0f, new Vector2(castDirection, 0f), 0.2f, _stats.WallLayer);
         if (hit.collider != null)
         {
             _isTouchingWall = true;
@@ -126,7 +126,18 @@ public class PlayerWallMechanics : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (_wallCheckPoint == null) return;
-        Gizmos.color = Color.yellow;
+        // Cek apakah sedang menyentuh dinding (berdasarkan hasil dari Update)
+        if (_isTouchingWall)
+        {
+            // Jika ya, ubah warna jadi merah
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            // Jika tidak, biarkan warna kuning
+            Gizmos.color = Color.yellow;
+        }
+        // Logika untuk menggambar kotak tetap sama
         float castDirection = _playerMovement != null && _playerMovement._isFacingRight ? 1f : -1f;
         Vector3 checkCenter = _wallCheckPoint.position + new Vector3(0.1f * castDirection, 0);
         Gizmos.DrawWireCube(checkCenter, _wallCheckSize);

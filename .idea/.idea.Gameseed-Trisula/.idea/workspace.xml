@@ -6,6 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="efa1ae4e-f877-4576-9038-93dc28ecf27f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gameseed-Trisula/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/InputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerControl.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerControl.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMoveStats.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMoveStats.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovementStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerMovementStats.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/PlayerWallMechanics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/TrampoulineObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Player/TrampoulineObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Prefab/Arena.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ari`s Script Workshop/Prefab/Arena.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameplayScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameplayScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

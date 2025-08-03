@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         Movement = _moveAction.ReadValue<Vector2>();
-
+        Debug.Log("SUMBER INPUT MANAGER membaca Movement.x = " + Movement.x);
         JumpWasPressed = _jumpAction.WasPressedThisFrame();
         JumpIsHeld = _jumpAction.IsPressed();
         JumpWasReleased = _jumpAction.WasReleasedThisFrame();
