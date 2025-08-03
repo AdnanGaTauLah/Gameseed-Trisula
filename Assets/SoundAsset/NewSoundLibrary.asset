@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Player_Jump
-    clip: {fileID: 8300000, guid: 3d010990fdcb87b4598cd8990b8717e9, type: 3}
+    clip: {fileID: 8300000, guid: ff3233f6012f3af43b90e5da7c33d493, type: 3}
     volume: 0
     pitch: 0.1
     isLooping: 0
     source: {fileID: 0}
   - name: Player_Land
-    clip: {fileID: 8300000, guid: 49d1867a1d4004f49bac86be1fb7a4bd, type: 3}
+    clip: {fileID: 8300000, guid: df55f27e17d06e24382e8fa889bf302c, type: 3}
     volume: 0
     pitch: 0.1
     isLooping: 0
     source: {fileID: 0}
   - name: Player_WallJump
-    clip: {fileID: 8300000, guid: e8c9053b6c18a194abdc5f1935abd44d, type: 3}
+    clip: {fileID: 8300000, guid: 1ea9d076f7d0519448d9678efecb0bd6, type: 3}
     volume: 1
     pitch: 0
     isLooping: 0
     source: {fileID: 0}
   - name: Player_GrindJump
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8e0d7eb8e1b74804e9f1b4d982073a9a, type: 3}
     volume: 0
     pitch: 0
     isLooping: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
     isLooping: 0
     source: {fileID: 0}
   - name: Trampoline_Bounce
-    clip: {fileID: 8300000, guid: 4671371798c1d5748bf15c7f5667caa2, type: 3}
+    clip: {fileID: 8300000, guid: a0f906328fb7636429cb74937cfcd498, type: 3}
     volume: 0
     pitch: 0
     isLooping: 0
@@ -68,25 +68,25 @@ MonoBehaviour:
     isLooping: 0
     source: {fileID: 0}
   - name: Player_Grind_Loop
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8e0d7eb8e1b74804e9f1b4d982073a9a, type: 3}
     volume: 0
     pitch: 0.1
     isLooping: 1
     source: {fileID: 0}
   - name: Player_Walk_Loop
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: b3b52c3c0fe629f47a5449c575825be8, type: 3}
     volume: 0
     pitch: 0.1
     isLooping: 1
     source: {fileID: 0}
   - name: Player_Run_Loop
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: b9d073f112961214f85ad99b21351b3e, type: 3}
     volume: 0
     pitch: 0.1
     isLooping: 1
     source: {fileID: 0}
   - name: Player_WallSlide_Loop
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8e0d7eb8e1b74804e9f1b4d982073a9a, type: 3}
     volume: 0
     pitch: 0.1
     isLooping: 1

@@ -2220,6 +2220,10 @@ PrefabInstance:
       propertyPath: _wallCheckPoint
       value: 
       objectReference: {fileID: 1787363860}
+    - target: {fileID: 3481069250551182899, guid: 13a884a6a051dce499d5b487ac63162a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3505310303814013693, guid: 13a884a6a051dce499d5b487ac63162a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
