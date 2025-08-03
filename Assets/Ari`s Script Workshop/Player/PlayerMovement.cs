@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
         CollisionCheck();
         Jump();
-        Debug.Log("TUJUAN PlayerMovement menerima Movement.x = " + InputManager.Movement.x);
+        //Debug.Log("TUJUAN PlayerMovement menerima Movement.x = " + InputManager.Movement.x);
         if (_isGrounded)
         {
             Move(MoveStats.GroundAcceleration, MoveStats.GroundDeceleration, InputManager.Movement);
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(float acceleration, float deceleration, Vector2 moveInput)
     {
-        string debugMessage = "";
+        //string debugMessage = "";
         
         if (moveInput != Vector2.zero)
         {
@@ -134,20 +134,19 @@ public class PlayerMovement : MonoBehaviour
             if (InputManager.RunIsHeld)
             {
                 targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
-                debugMessage =
-                    $"[RUNNING] Input: {moveInput.x:F2}, MaxSpeed: {MoveStats.MaxRunSpeed}, TargetV: {targetVelocity.x:F2}";
+                //debugMessage =$"[RUNNING] Input: {moveInput.x:F2}, MaxSpeed: {MoveStats.MaxRunSpeed}, TargetV: {targetVelocity.x:F2}";
             }
             else
             {
                 targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxWalkSpeed;
-                debugMessage = $"[WALKING] Input: {moveInput.x:F2}, MaxSpeed: {MoveStats.MaxWalkSpeed}, TargetV: {targetVelocity.x:F2}";
+                //debugMessage = $"[WALKING] Input: {moveInput.x:F2}, MaxSpeed: {MoveStats.MaxWalkSpeed}, TargetV: {targetVelocity.x:F2}";
             }
             _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
             
-            debugMessage += $", PrevV: {previousMoveVelocityX:F2}, NewV: {_moveVelocity.x:F2}";
+            //debugMessage += $", PrevV: {previousMoveVelocityX:F2}, NewV: {_moveVelocity.x:F2}";
         
             // Cetak semua informasi ke Console
-            Debug.Log(debugMessage);
+            //Debug.Log(debugMessage);
         }
         else
         {

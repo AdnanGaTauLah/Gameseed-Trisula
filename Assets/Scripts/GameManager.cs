@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 timeRemaining = 0;
-                Debug.Log("GAME OVER - Ran out of time!");
+                //.Log("GAME OVER - Ran out of time!");
                 currentState = GameState.Finished;
                 uiManager.ShowResults(0);
             }
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     public void RegisterPlayer(PlayerMovement newPlayer)
     {
         playerMovement = newPlayer;
-        Debug.Log("Player has been registered with the GameManager.");
+        //Debug.Log("Player has been registered with the GameManager.");
     }
 
     private void ResetGameState()
@@ -71,19 +71,19 @@ public class GameManager : MonoBehaviour
         }
 
         typingManager.gameObject.SetActive(false);
-        Debug.Log("Game state has been reset.");
+        //Debug.Log("Game state has been reset.");
     }
 
     public void RestartLevel()
     {
-        Debug.Log("Restarting level...");
+        //Debug.Log("Restarting level...");
         LevelManager.Instance.ReloadCurrentLevel();
         ResetGameState();
     }
 
     public void GoToNextLevel()
     {
-        Debug.Log("Loading next level...");
+        //Debug.Log("Loading next level...");
         LevelManager.Instance.LoadNextLevel();
         ResetGameState();
     }
@@ -92,14 +92,14 @@ public class GameManager : MonoBehaviour
     {
         if (playerMovement == null)
         {
-            Debug.LogError("Cannot start typing phase: PlayerMovement is not registered!");
+            //Debug.LogError("Cannot start typing phase: PlayerMovement is not registered!");
             return;
         }
 
         if (currentState == GameState.Playing)
         {
             currentState = GameState.Typing;
-            Debug.Log("Delivery reached! State: Typing");
+            //Debug.Log("Delivery reached! State: Typing");
 
             // Use the freezing mechanism from PlayerMovement
             playerMovement.IsFrozen = true;
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.Typing)
         {
             currentState = GameState.Finished;
-            Debug.Log("Typing complete! State: Finished. Time Remaining: " + timeRemaining);
+            //Debug.Log("Typing complete! State: Finished. Time Remaining: " + timeRemaining);
 
             int stars = 0;
             if (timeRemaining >= threeStarThreshold) { stars = 3; }
